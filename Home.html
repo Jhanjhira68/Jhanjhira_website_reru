@@ -67,43 +67,19 @@
 
     <div class="container-sm text-center py-5 mt-5">
         <h2 class="fw-bold">คำอธิบายรายวิชา</h2>
-        <p><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi at labore exercitationem amet
-                fugiat unde nam earum dolore obcaecati! Eum earum deleniti asperiores esse, vero eos. Rem perferendis
-                quae porro nam minus eaque incidunt, nesciunt repellendus veniam optio vel quam ipsam non dolor
-                voluptatem harum ea magnam alias. Voluptatibus iste nesciunt eveniet laborum error. Culpa temporibus
-                quam nihil enim sequi ratione officia natus, rem doloribus. Dignissimos, dolorem voluptatem! Blanditiis
-                expedita, quasi, error aspernatur a accusamus necessitatibus odit officiis fugiat laborum dolores
-                laudantium incidunt consequatur dolor. Et, explicabo? Perspiciatis distinctio ut eaque sapiente illum
-                voluptatum cum, harum voluptas error quo exercitationem numquam repellendus tenetur atque itaque sed
-                cupiditate doloribus deleniti animi aliquid modi consectetur culpa nihil neque? Id quos illo ipsum,
-                officia non soluta eaque autem possimus asperiores voluptatum minus, cupiditate provident. Nam harum
-                voluptate tenetur quia officiis voluptates, repudiandae soluta fugiat cum fugit a laudantium corrupti?
-                Doloremque temporibus esse dignissimos officia eligendi non nisi eaque, atque, sed assumenda officiis
-                repellat autem deserunt natus adipisci nostrum pariatur recusandae tempore et! Id corrupti repudiandae
-                dignissimos ipsa consequuntur distinctio beatae animi molestias harum. Ipsa velit quod cum. Laboriosam,
-                deleniti libero voluptas assumenda odit voluptatem, deserunt consectetur animi nesciunt est at quisquam
-                corporis totam possimus, nobis reprehenderit aspernatur corrupti ex. Soluta libero provident fuga. Eius
-                error magnam voluptatibus maiores consequatur exercitationem, reiciendis quidem eos perferendis esse
-                molestiae cumque qui delectus sed non odio? Tenetur explicabo blanditiis soluta odit placeat, quasi
-                itaque qui doloribus commodi aut dolores deleniti mollitia iste sed debitis cumque ipsam. Exercitationem
-                a quis aspernatur eius pariatur doloribus accusantium voluptatum. Voluptates rem nulla quae debitis ab
-                eum ipsa blanditiis optio adipisci necessitatibus provident, ut aut cupiditate dicta distinctio iure
-                nesciunt fugit qui consequatur ipsam? Aliquid quibusdam cupiditate sint laborum fugit cumque alias odit
-                ad dolores quaerat odio iste, fuga modi est autem nam at laudantium magnam omnis illum eum. Ut tenetur
-                necessitatibus a doloremque reprehenderit numquam nam quod, dolorum autem? Culpa voluptas qui beatae rem
-                consequatur in perferendis odit pariatur dignissimos dicta praesentium iure assumenda tempora voluptate
-                voluptatibus voluptatum, deserunt, cumque debitis, reprehenderit magni tempore possimus eaque amet vel?
-                Dicta pariatur voluptatem provident harum cum magni voluptate eos autem, quisquam odit exercitationem
-                minima amet tempore voluptatum nihil rem cumque et error ab suscipit, dolore, nam illo? Expedita optio
-                tempora illum fugiat sint vero provident ducimus, voluptates amet nisi eligendi reiciendis cupiditate
-                nihil officiis ratione voluptatem consequatur placeat ab odio id quas adipisci labore maiores. Sit vitae
-                aliquam eveniet consectetur fuga nobis voluptatem eaque et eius nam perspiciatis debitis, harum libero,
-                non ipsa asperiores doloremque saepe nostrum illum nesciunt necessitatibus. Velit dolor quia itaque vero
-                ipsa sunt quis porro numquam iusto a. Alias itaque vero non quo in! Ea eaque magni vero assumenda
-                dignissimos nostrum temporibus velit ut. Perferendis qui, at harum exercitationem aut alias mollitia
-                atque adipisci. Exercitationem quo fugit nam, repellat quasi aliquid officia distinctio atque voluptas
-                illo provident consectetur vero dolore ipsa adipisci, quaerat perferendis voluptates quisquam totam
-                nesciunt ab inventore nemo, sunt iusto? Atque dolorem aliquid beatae suscipit rem.</small></p>
+         <div class="card shadow-sm">
+          <img src="https://via.placeholder.com/400x250?text=เอกสาร+1" class="card-img-top" alt="Document 1">
+          <div class="card-body">
+            <h5 class="card-title">เอกสารตัวอย่าง 1</h5>
+            <p class="card-text text-muted">รายละเอียดของเอกสารนี้</p>
+            <button class="btn btn-primary viewDocBtn" 
+              data-title="เอกสารตัวอย่าง 1"
+              data-src="document.pdf">
+              ดูเอกสาร
+            </button>
+          </div>
+        </div>
+        
     </div>
 
     
@@ -114,9 +90,45 @@
         </div>
     </footer>
     <script src="style.js"></script>
+    <script>
+    // เมื่อกดปุ่ม "ดูเอกสาร"
+    document.querySelectorAll('.viewDocBtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const title = this.getAttribute('data-title');
+        const src = this.getAttribute('data-src');
+
+        // ตั้งค่าชื่อและลิงก์ของเอกสารใน modal
+        document.getElementById('docTitle').innerText = title;
+        document.getElementById('docViewer').src = src;
+
+        // แสดง modal
+        const modal = new bootstrap.Modal(document.getElementById('docModal'));
+        modal.show();
+      });
+    });
+
+    // ล้าง iframe เมื่อปิด modal (ช่วยลดโหลด)
+    document.getElementById('docModal').addEventListener('hidden.bs.modal', function () {
+      document.getElementById('docViewer').src = '';
+    });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
+    <div class="modal fade" id="docModal" tabindex="-1" aria-labelledby="docModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="docTitle">ชื่อเอกสาร</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
+        </div>
+        <div class="modal-body p-0">
+          <iframe id="docViewer" src="" width="100%" height="600px" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
