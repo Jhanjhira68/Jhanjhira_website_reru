@@ -75,6 +75,28 @@
             <small>© สาขาวิชาการศึกษาปฐมวัย มหาวิทยาลัยราชภัฏร้อยเอ็ด l ECED RERU </small>
         </div>
     </footer>
+    <script>
+    // เมื่อกดปุ่ม "ดูเอกสาร"
+    document.querySelectorAll('.viewDocBtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const title = this.getAttribute('data-title');
+        const src = this.getAttribute('data-src');
+
+        // ตั้งค่าชื่อและลิงก์ของเอกสารใน modal
+        document.getElementById('docTitle').innerText = title;
+        document.getElementById('docViewer').src = src;
+
+        // แสดง modal
+        const modal = new bootstrap.Modal(document.getElementById('docModal'));
+        modal.show();
+      });
+    });
+
+    // ล้าง iframe เมื่อปิด modal (ช่วยลดโหลด)
+    document.getElementById('docModal').addEventListener('hidden.bs.modal', function () {
+      document.getElementById('docViewer').src = '';
+    });
+    </script>
     <script src="style.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"

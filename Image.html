@@ -47,9 +47,9 @@
                                 งานที่ได้รับมอบหมาย
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item text-hover-css" href="#">เมนูย่อย 1</a></li>
-                                <li><a class="dropdown-item text-hover-css" href="#">เมนูย่อย 2</a></li>
-                                <li><a class="dropdown-item text-hover-css" href="#">เมนูย่อย 3</a></li>
+                                <li><a href="#" class="dropdown-item text-hover-css viewDocBtn" data-title="งานที่ได้รับมอบหมาย 1" data-src="w1.pdf">งานที่ได้รับมอบหมาย 1</a></li>
+                                <li><a href="#" class="dropdown-item text-hover-css viewDocBtn" data-title="งานที่ได้รับมอบหมาย 2" data-src="w2.pdf">งานที่ได้รับมอบหมาย 2</a></li>
+                                <li><a href="#" class="dropdown-item text-hover-css viewDocBtn" data-title="งานที่ได้รับมอบหมาย 3" data-src="w3.pdf">งานที่ได้รับมอบหมาย 3</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -74,6 +74,28 @@
             <small>© สาขาวิชาการศึกษาปฐมวัย มหาวิทยาลัยราชภัฏร้อยเอ็ด l ECED RERU </small>
         </div>
     </footer>
+    <script>
+    // เมื่อกดปุ่ม "ดูเอกสาร"
+    document.querySelectorAll('.viewDocBtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const title = this.getAttribute('data-title');
+        const src = this.getAttribute('data-src');
+
+        // ตั้งค่าชื่อและลิงก์ของเอกสารใน modal
+        document.getElementById('docTitle').innerText = title;
+        document.getElementById('docViewer').src = src;
+
+        // แสดง modal
+        const modal = new bootstrap.Modal(document.getElementById('docModal'));
+        modal.show();
+      });
+    });
+
+    // ล้าง iframe เมื่อปิด modal (ช่วยลดโหลด)
+    document.getElementById('docModal').addEventListener('hidden.bs.modal', function () {
+      document.getElementById('docViewer').src = '';
+    });
+    </script>
     <script src="style.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
